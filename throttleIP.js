@@ -8,8 +8,8 @@ const ddosStopper = (bReq, bRes, delay, requests) => {
   setTimeout(() => delete ipAddresses[ip], delay);
 
   if (ipAddresses[ip] > requests) {
-    bRes.statusCode = 500;
-    return bRes.end('500 Server Error');
+    bRes.statusCode = 429;
+    return bRes.end('429 Limit Exceeded');
   }
 };
 

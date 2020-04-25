@@ -115,7 +115,8 @@ class LoadBalancer extends EventEmitter {
 
     // Loops through servers in options & sends mock requests to each
     for (let i = 0; i < options.length; i += 1) {
-      protocol.get(options[i] + customurl, (res) => {
+      options[i].path = customurl;
+      protocol.get(options[i], (res) => {
         if (res.statusCode > 100 && res.statusCode < 400) {
           if (options[i].active === false) options[i].active = true;
         } else {

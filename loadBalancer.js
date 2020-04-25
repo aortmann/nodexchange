@@ -103,7 +103,7 @@ class LoadBalancer extends EventEmitter {
    * @public
    */
 
-  healthCheck(interval = null, ssl = false) {
+  healthCheck(interval = null, ssl = false, customurl = '/health-check') {
     /**
      * Healthcheck sends dummy requests to servers to check server health
      * Alters 'active' property boolean value based on result of health check
@@ -115,7 +115,7 @@ class LoadBalancer extends EventEmitter {
 
     // Loops through servers in options & sends mock requests to each
     for (let i = 0; i < options.length; i += 1) {
-      protocol.get(options[i], (res) => {
+      protocol.get(options[i] + customurl, (res) => {
         if (res.statusCode > 100 && res.statusCode < 400) {
           if (options[i].active === false) options[i].active = true;
         } else {

@@ -290,7 +290,7 @@ class LoadBalancer extends EventEmitter {
         const serverOptions = {};
         serverOptions.method = bReq.method;
         serverOptions.path = bReq.url;
-        serverOptions.headers = bReq.headers;
+        serverOptions.headers = { ...bReq.headers, ...target.headers };
         serverOptions.hostname = target.hostname;
         serverOptions.port = target.port;
 
